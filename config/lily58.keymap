@@ -29,7 +29,7 @@
                               &kp LALT  &kp LEFT_WIN  &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT
             >;
 
-            sensor-bindings <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         lower_layer {
