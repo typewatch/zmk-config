@@ -37,6 +37,15 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        off-toggle {
+            bindings = <&tog 1>;
+            key-positions = <50 57>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -49,11 +58,11 @@
             //                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | RAISE| BSPC  | GUI   |
 
             bindings = <
-&kp ESC     &kp N1             &kp N2            &kp N3             &kp N4             &kp N5                                           &kp N6           &kp N7              &kp N8             &kp N9            &kp N0                &kp BACKSPACE
-&kp TAB     &kp Q              &kp W             &kp E              &kp R              &kp T                                            &kp Y            &kp U               &kp I              &kp O             &kp P                 &kp MINUS
-&kp LSHIFT  &ltaphold LMETA A  &ltaphold LALT S  &ltaphold LCTRL D  &ltaphold LSHFT F  &kp G                                            &kp H            &rtaphold RSHIFT J  &rtaphold RCTRL K  &rtaphold RALT L  &rtaphold RMETA SEMI  &kp SQT
-&kp LCTRL   &kp Z              &kp X             &kp C              &kp V              &kp B      &kp C_PLAY_PAUSE    &kp C_PLAY_PAUSE  &kp N            &kp M               &kp COMMA          &kp DOT           &kp FSLH              &kp RCTRL
-                                                 &kp LALT           &lt 4 RS(ESC)      &lt 3 TAB  &kp SPACE           &kp ENTER         &lt 2 BACKSPACE  &tog 1              &kp RALT
+&kp ESC     &kp N1             &kp N2            &kp N3             &kp N4             &kp N5                                           &kp N6  &kp N7              &kp N8             &kp N9            &kp N0                &kp BACKSPACE
+&kp TAB     &kp Q              &kp W             &kp E              &kp R              &kp T                                            &kp Y   &kp U               &kp I              &kp O             &kp P                 &kp MINUS
+&kp LSHIFT  &ltaphold LMETA A  &ltaphold LALT S  &ltaphold LCTRL D  &ltaphold LSHFT F  &kp G                                            &kp H   &rtaphold RSHIFT J  &rtaphold RCTRL K  &rtaphold RALT L  &rtaphold RMETA SEMI  &kp SQT
+&kp LCTRL   &kp Z              &kp X             &kp C              &kp V              &kp B      &kp C_PLAY_PAUSE    &kp C_PLAY_PAUSE  &kp N   &kp M               &kp COMMA          &kp DOT           &kp FSLH              &kp RCTRL
+                                                 &mo 5              &lt 4 ESC          &lt 3 TAB  &kp SPACE           &kp ENTER         &mo 2   &kp BACKSPACE       &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -71,12 +80,31 @@
 
         nav {
             bindings = <
-&trans  &trans      &trans      &trans    &trans     &trans                     &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &bt BT_PRV  &bt BT_NXT  &kp UP    &trans     &trans                     &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp HOME    &kp LEFT    &kp DOWN  &kp RIGHT  &kp END                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans      &trans      &trans    &trans     &trans   &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                                &trans    &trans     &trans   &trans    &trans  &trans  &trans  &trans
+&trans  &trans      &trans      &trans    &trans     &trans                       &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt BT_PRV  &bt BT_NXT  &kp UP    &kp PG_DN  &kp PG_UP                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp HOME    &kp LEFT    &kp DOWN  &kp RIGHT  &kp END                      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans      &trans      &trans    &trans     &trans     &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                                &trans    &trans     &trans     &trans    &trans  &trans  &trans  &trans
             >;
+        };
+
+        num {
+            // ------------------------------------------------------------------------------------------------------------
+            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
+            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
+            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
+            //                     |      |      |      |        |  |       |      |       |       |
+
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans      &trans  &trans  &trans        &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp EQUAL   &kp N7  &kp N8  &kp N9        &kp MINUS  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp PERIOD  &kp N4  &kp N5  &kp NUMBER_6  &kp PLUS   &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp N0      &kp N1  &kp N2  &kp NUMBER_3  &kp SLASH  &trans
+                        &trans  &trans  &trans  &trans    &trans  &trans      &trans  &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         sym {
@@ -98,23 +126,14 @@
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        num {
-            // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
-            //                     |      |      |      |        |  |       |      |       |       |
-
+        fun {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans      &trans  &trans  &trans        &trans     &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp EQUAL   &kp N7  &kp N8  &kp N9        &kp MINUS  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp PERIOD  &kp N4  &kp N5  &kp NUMBER_6  &kp PLUS   &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp N0      &kp N1  &kp N2  &kp NUMBER_3  &kp SLASH  &trans
-                        &trans  &trans  &trans  &trans    &trans  &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans   &trans  &trans  &trans  &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp F12  &kp F7  &kp F8  &kp F9  &to 0            &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp F11  &kp F4  &kp F5  &kp F6  &kp PRINTSCREEN  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp F9   &kp F1  &kp F2  &kp F3  &to 1            &trans
+                        &trans  &trans  &trans  &trans    &trans  &trans   &trans  &trans
             >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 
